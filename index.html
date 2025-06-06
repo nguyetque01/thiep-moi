@@ -447,9 +447,7 @@
                 <p>Trân trọng kính mời</p>
 
                 <span class="highlight">
-                    Các anh chị và các bạn đồng nghiệp
-                    <br />
-                    Công ty MeU Solutions
+                    Quý thầy cô, gia đình, bạn bè, đồng nghiệp
                 </span>
 
                 <p>Đến tham dự lễ tốt nghiệp của <span class="name-emphasis">Nguyệt Quế</span></p>
@@ -596,6 +594,22 @@
                 canvas.width = width;
                 canvas.height = height;
             });
+        });        // Lấy tên người được mời và trạng thái company từ URL
+        document.addEventListener('DOMContentLoaded', function () {
+            const inviteeName = document.querySelector('.highlight');
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('ten');
+            const isCompany = urlParams.get('company') === 'true';
+
+            if (guestName) {
+                // Giải mã URL và thay thế dấu + thành khoảng trắng
+                const decodedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
+                if (isCompany) {
+                    inviteeName.innerHTML = `Các anh chị và các bạn đồng nghiệp<br/>${decodedName}`;
+                } else {
+                    inviteeName.textContent = decodedName;
+                }
+            }
         });
     </script>
 </body>
