@@ -142,29 +142,33 @@
         /* Header section */
         .header {
             text-align: center;
+            margin-top: 10px;
             margin-bottom: 30px;
         }
 
         .title {
+            position: relative;
+            display: inline-block;
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3.4rem;
             color: #7e57c2;
             margin-bottom: 20px;
             line-height: 1.2;
-            animation: title-float 6s ease-in-out infinite;
+            transform-origin: 50% 50%;
+            animation: curved-title-float 6s ease-in-out infinite;
         }
 
-        @keyframes title-float {
+        @keyframes curved-title-float {
             0% {
-                transform: translateY(0);
+                transform: translateY(0) perspective(400px) rotateX(10deg);
             }
 
             50% {
-                transform: translateY(-8px);
+                transform: translateY(-8px) perspective(400px) rotateX(15deg);
             }
 
             100% {
-                transform: translateY(0);
+                transform: translateY(0) perspective(400px) rotateX(10deg);
             }
         }
 
@@ -178,9 +182,9 @@
         }
 
         .graduation-cap {
-            font-size: 4rem;
+            font-size: 6rem;
             color: #5e35b1;
-            margin: 20px 0;
+            margin: 12px 0;
             transition: all 0.3s ease;
             display: inline-block;
             cursor: pointer;
@@ -483,7 +487,7 @@
                         <h3>Tiệc mừng</h3>
                         <p class="line-break">18h, ngày 14/06/2025</p>
                         <p class="line-break">Lẩu tôm Năm Ri 5</p>
-                        <span class="note">(121 Võ Thị Sáu, P.Trung Dũng, TP.Biên Hòa, Đồng Nai)</span>
+                        <span class="note">(121 Võ Thị Sáu, P. Trung Dũng, TP. Biên Hòa, Đồng Nai)</span>
                     </div>
                 </div>
             </div>
@@ -491,7 +495,7 @@
             <!-- Thank you section -->
             <div class="thank-you">
                 <p>Nguyệt Quế xin gửi lời cảm ơn chân thành và sâu sắc nhất đến tất
-                    cả mọi người đã luôn đồng hành, ủng hộ và yêu thương trong suốt chặng đường học tập vừa qua.</p>
+                    cả mọi người đã luôn đồng hành, ủng hộ và yêu thương trong suốt chặng đường vừa qua.</p>
                 <p>Sự hiện diện của quý vị là niềm vinh dự và là lời chúc mừng ý nghĩa nhất dành cho Nguyệt Quế trong
                     ngày trọng đại này.</p>
             </div>
