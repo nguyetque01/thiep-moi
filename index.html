@@ -485,6 +485,18 @@
                     </div>
                 </div>
 
+                <!-- <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Địa điểm</h3>
+                        <p>Trường Đại học Công nghệ Đồng Nai</p>
+                        <p>Trung tâm tổ chức Sự kiện & Giải trí</p>
+                        <span class="note">(Gần màn hình lớn)</span>
+                    </div>
+                </div> -->
+
                 <div class="info-item">
                     <div class="info-icon">
                         <i class="fas fa-utensils"></i>
@@ -602,22 +614,36 @@
                 canvas.width = width;
                 canvas.height = height;
             });
-        });        // Lấy tên người được mời và trạng thái company từ URL
-        document.addEventListener('DOMContentLoaded', function () {
-            const inviteeName = document.querySelector('.highlight'); const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('name');
-            const isCompany = urlParams.get('company') === 'true';
+        });        // Lấy tên người được mời và trạng thái company từ URL        document.addEventListener('DOMContentLoaded', function () {
+        const inviteeName = document.querySelector('.highlight');
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('name');
+        const isCompany = urlParams.get('company') === 'true';
+        const useEm = urlParams.get('em') === 'true';
 
-            if (guestName) {
-                // Giải mã URL và thay thế dấu + thành khoảng trắng
-                const decodedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
-                if (isCompany) {
-                    inviteeName.innerHTML = `Các anh chị và các bạn đồng nghiệp<br/>${decodedName}`;
-                } else {
-                    inviteeName.textContent = decodedName;
-                }
+        // Thay đổi xưng hô trong các phần khác của thiệp
+        const nameEmphasis = document.querySelector('.name-emphasis');
+        const thankYouText = document.querySelector('.thank-you');
+
+        if (useEm) {
+            thankYouText.innerHTML = `
+                    <p>Em xin gửi lời cảm ơn chân thành và sâu sắc nhất đến tất
+                        cả mọi người đã luôn đồng hành, ủng hộ và yêu thương trong suốt chặng đường vừa qua.</p>
+                    <p>Sự hiện diện của quý vị là niềm vinh dự và là lời chúc mừng ý nghĩa nhất dành cho em trong
+                        ngày trọng đại này.</p>
+                `;
+        }
+
+        if (guestName) {
+            // Giải mã URL và thay thế dấu + thành khoảng trắng
+            const decodedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
+            if (isCompany) {
+                inviteeName.innerHTML = `Các anh chị và các bạn đồng nghiệp<br/>${decodedName}`;
+            } else {
+                inviteeName.textContent = decodedName;
             }
-        });
+        }
+
     </script>
 </body>
 
