@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Lễ Tốt Nghiệp Nguyệt Quế</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,600;1,700&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            color: #3a3a3a;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Confetti canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Floating shapes */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            background: #7e57c2;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            bottom: 15%;
+            right: 7%;
+            width: 100px;
+            height: 100px;
+            background: #5e35b1;
+            border-radius: 30% 70% 50% 50% / 30% 30% 70% 70%;
+            animation: float 18s ease-in-out infinite;
+        }
+
+        .shape-3 {
+            top: 30%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            background: #b39ddb;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .shape-4 {
+            bottom: 25%;
+            left: 8%;
+            width: 70px;
+            height: 70px;
+            background: #4a148c;
+            border-radius: 50% 50% 40% 60% / 50% 40% 60% 50%;
+            animation: float 16s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            100% {
+                transform: translateY(0) rotate(360deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+        }
+
+        /* Card container */
+        .card-container {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(126, 87, 194, 0.2);
+            border: 1px solid #b39ddb;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 30px rgba(126, 87, 194, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 15px 40px rgba(126, 87, 194, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 10px 30px rgba(126, 87, 194, 0.2);
+            }
+        }
+
+        /* Header section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #7e57c2;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: title-float 6s ease-in-out infinite;
+        }
+
+        @keyframes title-float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .graduate-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #5e35b1;
+            font-style: italic;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .graduation-cap {
+            font-size: 4rem;
+            color: #5e35b1;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .graduation-cap:hover {
+            transform: translateY(-10px) rotate(10deg);
+            color: #4a148c;
+        }
+
+        /* Invitation text */
+        .invitation-text {
+            text-align: center;
+            margin: 30px 0;
+            line-height: 1.8;
+        }
+
+        .invitation-text p {
+            margin: 15px 0;
+            font-size: 1.25rem;
+        }
+
+        .highlight {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            font-weight: 600;
+            /* font-style: italic; */
+            color: #000;
+            display: block;
+            margin: 15px 0;
+            line-height: 1.3;
+        }
+
+        .purpose {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #000;
+            margin: 15px 0;
+        }
+
+        .name-emphasis {
+            font-family: 'Great Vibes', cursive;
+            font-weight: 500;
+            font-style: italic;
+            color: #000;
+            font-size: 2rem;
+        }
+
+        /* Info section */
+        .info-section {
+            margin: 40px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: rgba(243, 229, 245, 0.6);
+            cursor: pointer;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            background: rgba(232, 217, 240, 0.8);
+        }
+
+        .info-icon {
+            font-size: 1.8rem;
+            color: #7e57c2;
+            margin-right: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .info-item:hover .info-icon {
+            transform: rotate(360deg);
+        }
+
+        .info-content h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #5e35b1;
+            margin-bottom: 8px;
+        }
+
+        .info-content p {
+            color: #6b6b6b;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .note {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #7e57c2;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .line-break {
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Thank you section */
+        .thank-you {
+            margin: 40px 0 30px;
+            padding: 25px 0;
+            position: relative;
+            text-align: center;
+            font-style: italic;
+            color: #6b6b6b;
+            font-size: 0.95rem;
+        }
+
+        .thank-you::before,
+        .thank-you::after {
+            content: "";
+            position: absolute;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b39ddb, transparent);
+        }
+
+        .thank-you::before {
+            top: 0;
+        }
+
+        .thank-you::after {
+            bottom: 0;
+        }
+
+        .thank-you p {
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        /* Closing section */
+        .closing {
+            text-align: right;
+            font-style: italic;
+            color: #000;
+            font-size: 1.5rem;
+            font-family: 'Great Vibes', cursive;
+            margin-top: 20px;
+            font-weight: 400;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .card {
+                padding: 25px;
+            }
+
+            .title {
+                font-size: 2.8rem;
+            }
+
+            .graduate-name {
+                font-size: 2.5rem;
+            }
+
+            .highlight {
+                font-size: 1.8rem;
+            }
+
+            .purpose {
+                font-size: 1.5rem;
+            }
+
+            .invitation-text p {
+                font-size: 1.1rem;
+            }
+
+            .info-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .info-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .floating-shape {
+                display: none;
+            }
+
+            .info-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .graduate-name {
+                font-size: 2rem;
+            }
+
+            .highlight {
+                font-size: 1.5rem;
+            }
+
+            .purpose {
+                font-size: 1.3rem;
+            }
+
+            .graduation-cap {
+                font-size: 3rem;
+            }
+
+            .closing {
+                font-size: 1.3rem;
+            }
+
+            .info-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    <div class="floating-shape shape-4"></div>
+
+    <!-- Confetti canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Main card container -->
+    <div class="card-container">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="title">
+                    Lễ Tốt Nghiệp Của Nguyệt Quế
+                </h1>
+                <div class="graduation-cap">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+            </div>
+
+            <!-- Invitation text -->
+            <div class="invitation-text">
+                <p>Trân trọng kính mời</p>
+
+                <span class="highlight">
+                    Các anh chị và các bạn đồng nghiệp
+                    <br />
+                    Công ty MeU Solutions
+                </span>
+
+                <p>Đến tham dự lễ tốt nghiệp của <span class="name-emphasis">Nguyệt Quế</span></p>
+            </div>
+
+            <!-- Info section -->
+            <div class="info-section">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Thời gian</h3>
+                        <p>Thứ 7, ngày 14/06/2025</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Xem lễ trao bằng và chụp ảnh lưu niệm</h3>
+                        <p>Trường Đại học Công nghệ Đồng Nai</p>
+                        <p>Trung tâm tổ chức Sự kiện & Giải trí</p>
+                        <span class="note">(Gần màn hình lớn)</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Tiệc mừng</h3>
+                        <p class="line-break">18h, ngày 14/06/2025</p>
+                        <p class="line-break">Lẩu tôm Năm Ri 5</p>
+                        <span class="note">(121 Võ Thị Sáu, P.Trung Dũng, TP.Biên Hòa, Đồng Nai)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thank you section -->
+            <div class="thank-you">
+                <p>Nguyệt Quế xin gửi lời cảm ơn chân thành và sâu sắc nhất đến tất
+                    cả mọi người đã luôn đồng hành, ủng hộ và yêu thương trong suốt chặng đường học tập vừa qua.</p>
+                <p>Sự hiện diện của quý vị là niềm vinh dự và là lời chúc mừng ý nghĩa nhất dành cho Nguyệt Quế trong
+                    ngày trọng đại này.</p>
+            </div>
+
+            <!-- Closing -->
+            <div class="closing">
+                Trân trọng kính mời!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Confetti effect
+        document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
+            // Set canvas dimensions
+            canvas.width = width;
+            canvas.height = height;
+
+            // Confetti particles
+            const particles = [];
+            const particleCount = 150;
+            const colors = ['#7e57c2', '#5e35b1', '#b39ddb', '#f3e5f5', '#4a148c'];
+            const shapes = ['circle', 'square', 'triangle'];
+
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * -height,
+                    radius: Math.random() * 10 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: shapes[Math.floor(Math.random() * shapes.length)],
+                    speed: Math.random() * 3 + 1,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 5 - 2.5,
+                    sway: Math.random() * 2 - 1
+                });
+            }
+
+            // Draw particles
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(particle => {
+                    ctx.save();
+                    ctx.translate(particle.x, particle.y);
+                    ctx.rotate(particle.rotation * Math.PI / 180);
+                    ctx.fillStyle = particle.color;
+
+                    switch (particle.shape) {
+                        case 'circle':
+                            ctx.beginPath();
+                            ctx.arc(0, 0, particle.radius, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                        case 'square':
+                            ctx.fillRect(-particle.radius, -particle.radius, particle.radius * 2, particle.radius * 2);
+                            break;
+                        case 'triangle':
+                            ctx.beginPath();
+                            ctx.moveTo(-particle.radius, particle.radius);
+                            ctx.lineTo(particle.radius, particle.radius);
+                            ctx.lineTo(0, -particle.radius);
+                            ctx.closePath();
+                            ctx.fill();
+                            break;
+                    }
+
+                    ctx.restore();
+
+                    // Update position
+                    particle.y += particle.speed;
+                    particle.x += particle.sway;
+                    particle.rotation += particle.rotationSpeed;
+
+                    // Reset particle when it goes off screen
+                    if (particle.y > height) {
+                        particle.y = Math.random() * -50;
+                        particle.x = Math.random() * width;
+                    }
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            // Start animation
+            draw();
+
+            // Handle window resize
+            window.addEventListener('resize', function () {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            });
+        });
+    </script>
+</body>
+
+</html>
