@@ -615,17 +615,15 @@
                 canvas.height = height;
             });
         });        // Lấy tên người được mời và trạng thái company từ URL        document.addEventListener('DOMContentLoaded', function () {
-        const inviteeName = document.querySelector('.highlight');
-        const urlParams = new URLSearchParams(window.location.search);
+        const inviteeName = document.querySelector('.highlight'); const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
         const isCompany = urlParams.get('company') === 'true';
-        const useEm = urlParams.get('em') === 'true';
+        // Mặc định dùng "em", chỉ khi em=false mới dùng "Nguyệt Quế"
+        const useEm = urlParams.get('em') !== 'false';
 
         // Thay đổi xưng hô trong các phần khác của thiệp
         const nameEmphasis = document.querySelector('.name-emphasis');
-        const thankYouText = document.querySelector('.thank-you');
-
-        if (useEm) {
+        const thankYouText = document.querySelector('.thank-you'); if (useEm) {
             thankYouText.innerHTML = `
                     <p>Em xin gửi lời cảm ơn chân thành và sâu sắc nhất đến tất
                         cả mọi người đã luôn đồng hành, ủng hộ và yêu thương trong suốt chặng đường vừa qua.</p>
